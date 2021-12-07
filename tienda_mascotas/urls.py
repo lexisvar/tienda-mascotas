@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 #from django.views.generic import TemplateView
-from mascotas.views import MascotasListado, PostreDetalle, PostreCrear, PostreActualizar, PostreEliminar
+from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar
 #from . import views
 
 #from mascotas.views import MascotasList
@@ -27,8 +27,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mascotas/', MascotasListado.as_view(template_name = "mascotas/index.html"), name='leer'),
-    path('mascotas/detalle/<int:pk>', PostreDetalle.as_view(template_name = "mascotas/detalles.html"), name='detalles'), 
-    path('mascotas/crear', PostreCrear.as_view(template_name = "mascotas/crear.html"), name='crear'),
-    path('mascotas/editar/<int:pk>', PostreActualizar.as_view(template_name = "mascotas/actualizar.html"), name='actualizar'),    
-    path('mascotas/eliminar/<int:pk>', PostreEliminar.as_view(), name='eliminar'),    
+    path('mascotas/detalle/<int:pk>', MascotaDetalle.as_view(template_name = "mascotas/detalles.html"), name='detalles'), 
+    path('mascotas/crear', MascotaCrear.as_view(template_name = "mascotas/crear.html"), name='crear'),
+    path('mascotas/editar/<int:pk>', MascotaActualizar.as_view(template_name = "mascotas/actualizar.html"), name='actualizar'),    
+    path('mascotas/eliminar/<int:pk>', MascotaEliminar.as_view(), name='eliminar'),    
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
