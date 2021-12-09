@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 #from django.views.generic import TemplateView
-from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar
+from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar, ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar
 #from . import views
 
 #from mascotas.views import MascotasList
@@ -25,10 +25,17 @@ from django.conf import settings
 from django.conf.urls.static import static 
 
 urlpatterns = [
+    # admin
     path('admin/', admin.site.urls),
+
+    # mascotas
     path('mascotas/', MascotasListado.as_view(template_name = "mascotas/index.html"), name='leer'),
     path('mascotas/detalle/<int:pk>', MascotaDetalle.as_view(template_name = "mascotas/detalles.html"), name='detalles'), 
     path('mascotas/crear', MascotaCrear.as_view(template_name = "mascotas/crear.html"), name='crear'),
     path('mascotas/editar/<int:pk>', MascotaActualizar.as_view(template_name = "mascotas/actualizar.html"), name='actualizar'),    
-    path('mascotas/eliminar/<int:pk>', MascotaEliminar.as_view(), name='eliminar'),    
+    path('mascotas/eliminar/<int:pk>', MascotaEliminar.as_view(), name='eliminar'), 
+
+    #productos
+    path('productos/', ProductosListado.as_view(template_name = "productos/index.html"), name='leer'), 
+    path('productos/crear', ProductoCrear.as_view(template_name = "productos/crear.html"), name='crear'),
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
