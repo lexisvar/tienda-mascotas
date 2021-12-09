@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2019 a las 06:07:49
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 7.2.5
+-- Host: localhost
+-- Generation Time: Dec 09, 2021 at 11:37 AM
+-- Server version: 10.3.32-MariaDB-0ubuntu0.20.04.1
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,54 +18,90 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tutoriales`
+-- Database: `tienda_mascotas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mascotas`
+-- Table structure for table `mascotas`
 --
 
 CREATE TABLE `mascotas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `precio` varchar(20) NOT NULL,
-  `stock` varchar(100) NOT NULL,
-  `img` varchar(100) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `especie` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `edad` int(11) NOT NULL,
+  `sexo` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `img` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `amo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `amo_telefono` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `mascotas`
+-- Dumping data for table `mascotas`
 --
 
-INSERT INTO `mascotas` (`id`, `nombre`, `precio`, `stock`, `img`, `created_at`, `updated_at`) VALUES
-(1, 'Gelatina de Fresa', '4.50', '46', 'gf_xSeTO3I.jpg', '2019-06-20 08:27:15.877932', '2019-06-20 08:27:49.101833'),
-(2, 'Torta de Chocolate', '5.50', '30', 'tc_eZFc4sh.jpg', '2019-06-20 08:27:35.583059', '2019-06-20 11:04:36.835346'),
-(3, 'Suspiro a la Limeña', '3.80', '35', 'sl_jCFHSpr.jpg', '2019-06-20 08:28:14.497285', '2019-06-20 08:28:14.497285'),
-(4, 'Arroz con Leche', '3.60', '38', 'al_3a7jXQt.jpg', '2019-06-20 08:28:52.368451', '2019-06-20 08:28:52.368451');
+INSERT INTO `mascotas` (`id`, `nombre`, `especie`, `edad`, `sexo`, `img`, `amo`, `amo_telefono`, `created_at`, `updated_at`) VALUES
+(1, 'Boob', 'Perro', 3, 'm', 'Boo.png', 'Alexis', '3012844988', '2021-12-09 14:58:10.752932', '2021-12-09 15:19:15.740099'),
+(2, 'Tinypig', 'Cerdo', 1, 'h', 'tinypig.jpg', 'Carlos Hurtado', '3115647896', '2021-12-09 15:24:00.774769', '2021-12-09 15:24:00.774846');
+
+-- --------------------------------------------------------
 
 --
--- Índices para tablas volcadas
+-- Table structure for table `productos`
+--
+
+CREATE TABLE `productos` (
+  `id` bigint(20) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `precio` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `stock` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `img` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `precio`, `stock`, `img`, `created_at`, `updated_at`) VALUES
+(2, 'Juguete Tug', '15700', '25', 'juguete_tug.jpg', '2021-12-09 16:20:14.267026', '2021-12-09 16:20:14.267055');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `mascotas`
+-- Indexes for table `mascotas`
 --
 ALTER TABLE `mascotas`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Indexes for table `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `mascotas`
+-- AUTO_INCREMENT for table `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
