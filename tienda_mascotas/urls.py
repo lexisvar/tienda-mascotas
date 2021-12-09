@@ -39,5 +39,7 @@ urlpatterns = [
     path('productos/', ProductosListado.as_view(template_name = "productos/index.html"), name='leer'), 
     path('productos/detalle/<int:pk>', ProductoDetalle.as_view(template_name = "productos/detalles.html"), name='detalles'),
     path('productos/crear', ProductoCrear.as_view(template_name = "productos/crear.html"), name='crear'),
-    path('productos/editar/<int:pk>', ProductoActualizar.as_view(template_name = "productos/actualizar.html"), name='actualizar'), 
+    path('productos/editar/<int:pk>', ProductoActualizar.as_view(template_name = "productos/actualizar.html"), name='actualizar'),
+    path('productos/eliminar/<int:pk>', ProductoEliminar.as_view(), name='eliminar'), 
+
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
