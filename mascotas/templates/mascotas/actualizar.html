@@ -1,37 +1,22 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="https://lexisvar.me/favicon.ico" />
-
-    <meta name="theme-color" content="#000000" />
-
-    <title>Como crear un CRUD con Django 2 y Bootstrap 4 - Parte 2 (Python 3.7) </title>
-
-    {# Cargamos la librería #}
-    {% load bootstrap4 %}
- 
-    {# CSS Bootstrap #}
-    {% bootstrap_css %} 
-
-	  {# Widget Tweaks #}
-    {% load widget_tweaks %}
-
-    {# Archivos #}
-    {% load static %}
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">       
-
-  </head>
+  
+  {% include 'partials/head.html' %} <!--head-->
 
   <body> 
 
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+
+    {# Widget Tweaks #}
+    {% load widget_tweaks %}
+
     <header>
-      {% include 'partials/nav.html' %} <!--Add this-->
-    </header>   
+      {% include 'partials/nav.html' %} <!--nav -->
+    </header> 
+
+    {# Archivos #}
+    {% load static %}
 
     <main role="main">
 
@@ -74,17 +59,21 @@
         					{% csrf_token %}
         						<!-- {{ form.as_p }} -->
         						<div class="form-group">
-        						    <label for="nombre" class="txt_negrita">Nombre</label>
-        						    {{ form.nombre|add_class:"form-control" }}
-        						</div>
-        						<div class="form-group">
-        						    <label for="precio" class="txt_negrita">Precio</label>
-        						    {{ form.precio|add_class:"form-control" }}
-        						</div>
-        						<div class="form-group">
-        						    <label for="stock" class="txt_negrita">Stock</label>
-        						    {{ form.stock|add_class:"form-control" }}
-        						</div>
+                      <label for="nombre" class="txt_negrita">Nombre</label>
+                      {{ form.nombre|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="precio" class="txt_negrita">Especie</label>
+                        {{ form.especie|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                      <label for="nombre" class="txt_negrita">Edad</label>
+                      {{ form.edad|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="stock" class="txt_negrita">Sexo</label>
+                        {{ form.sexo|add_class:"form-control" }}
+                    </div>
         						<div class="form-group">
         						    <label for="img" class="txt_negrita">Imagen</label>
         						    {{ form.img|add_class:"form-control mb-3" }}
@@ -92,6 +81,14 @@
         						    <img src="{% static 'uploads/'%}{{object.img}}" class="img-fluid" alt="{{object.nombre}}">
 
         						</div>
+                    <div class="form-group">
+                      <label for="stock" class="txt_negrita">Amo</label>
+                      {{ form.amo|add_class:"form-control" }}
+                    </div>
+                    <div class="form-group">
+                      <label for="stock" class="txt_negrita">Teléfono del amo</label>
+                      {{ form.amo_telefono|add_class:"form-control" }}
+                    </div>
         						<button type="submit" class="btn btn-primary">Aceptar</button>
                     <a href="../" type="submit" class="btn btn-primary">Volver</a>
         					</form>

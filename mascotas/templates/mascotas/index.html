@@ -1,34 +1,22 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="https://lexisvar.me/favicon.ico" />
-
-    <meta name="theme-color" content="#000000" />
-
-    <title>Como crear un CRUD con Django 2 y Bootstrap 4 - Parte 2 (Python 3.7) </title>
-
-    {# Cargamos la librería #}
-    {% load bootstrap4 %}
- 
-    {# CSS Bootstrap #}
-    {% bootstrap_css %} 
-
-    {# Archivos #}
-    {% load static %}
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
-    
-  </head>
+  
+  {% include 'partials/head.html' %} <!--head-->
 
   <body> 
 
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+
+    {# Widget Tweaks #}
+    {% load widget_tweaks %}
+
     <header>
-      {% include 'partials/nav.html' %} <!--Add this-->
-    </header>    
+      {% include 'partials/nav.html' %} <!--nav -->
+    </header>   
+    
+    {# Archivos #}
+    {% load static %}
 
     <main role="main">
 
@@ -77,9 +65,11 @@
                   <thead>
                     <tr>
                       <th width="35%">Nombre</th>
-                      <th>Precio</th>
-                      <th>Stock</th>
+                      <th>Especie</th>
+                      <th>Edad</th>
                       <th>Imagen</th>
+                      <th>Amo</th>
+                      <th>Amo teléfono</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
@@ -87,9 +77,12 @@
                     {% for mascota in object_list %}
                     <tr>
                       <td>{{ mascota.nombre }}</td>
-                      <td>{{ mascota.precio }}</td>
-                      <td>{{ mascota.stock }}</td>
-                      <td><img src="{% static 'uploads/'%}{{mascota.img}}" alt="{{mascota.nombre}}" class="img-fluid" width="7%"></td>
+                      <td>{{ mascota.especie }}</td>
+                      <td>{{ mascota.edad }}</td>
+                      <td><img src="{% static 'uploads/'%}{{mascota.img}}" alt="{{mascota.nombre}}" class="img-fluid" width="80%"></td>
+                      <td>{{ mascota.amo }}</td>
+                      <td>{{ mascota.amo_telefono }}</td>
+
                       <td>
                         
                         <form method="POST" action="eliminar/{{mascota.id}}">
