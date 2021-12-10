@@ -29,17 +29,17 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # mascotas
-    path('mascotas/', MascotasListado.as_view(template_name = "mascotas/index.html"), name='leer'),
-    path('mascotas/detalle/<int:pk>', MascotaDetalle.as_view(template_name = "mascotas/detalles.html"), name='detalles'), 
-    path('mascotas/crear', MascotaCrear.as_view(template_name = "mascotas/crear.html"), name='crear'),
-    path('mascotas/editar/<int:pk>', MascotaActualizar.as_view(template_name = "mascotas/actualizar.html"), name='actualizar'),    
-    path('mascotas/eliminar/<int:pk>', MascotaEliminar.as_view(), name='eliminar'), 
+    path('mascotas/', MascotasListado.as_view(template_name = "mascotas/index.html"), name='mascotas'),
+    path('mascotas/detalle/<int:pk>', MascotaDetalle.as_view(template_name = "mascotas/detalles.html"), name='mascotas'), 
+    path('mascotas/crear', MascotaCrear.as_view(template_name = "mascotas/crear.html"), name='mascotas'),
+    path('mascotas/editar/<int:pk>', MascotaActualizar.as_view(template_name = "mascotas/actualizar.html"), name='mascotas'),    
+    path('mascotas/eliminar/<int:pk>', MascotaEliminar.as_view(), name='mascotas'), 
 
     #productos
-    path('productos/', ProductosListado.as_view(template_name = "productos/index.html"), name='leer'), 
-    path('productos/detalle/<int:pk>', ProductoDetalle.as_view(template_name = "productos/detalles.html"), name='detalles'),
-    path('productos/crear', ProductoCrear.as_view(template_name = "productos/crear.html"), name='crear'),
-    path('productos/editar/<int:pk>', ProductoActualizar.as_view(template_name = "productos/actualizar.html"), name='actualizar'),
-    path('productos/eliminar/<int:pk>', ProductoEliminar.as_view(), name='eliminar'), 
+    path('productos/', ProductosListado.as_view(template_name = "productos/index.html"), name='productos'), 
+    path('productos/detalle/<int:pk>', ProductoDetalle.as_view(template_name = "productos/detalles.html"), name='productos'),
+    path('productos/crear', ProductoCrear.as_view(template_name = "productos/crear.html"), name='productos'),
+    path('productos/editar/<int:pk>', ProductoActualizar.as_view(template_name = "productos/actualizar.html"), name='productos'),
+    path('productos/eliminar/<int:pk>', ProductoEliminar.as_view(), name='productos'), 
 
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -19,3 +19,15 @@ body > main > div > div.row.mb-5 > div.col-md-10 > div > div > form > div:nth-ch
 .navbar-brand img {
   height: 50px;
 }
+
+.menu a{
+  color: #000!important;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.menu .active a{
+  color:azure!important;
+  text-decoration: none;
+  background-color: transparent;
+}
