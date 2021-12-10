@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Mascotas, Productos
+from .models import Mascotas, Productos, Servicios
 
 from django.urls import reverse
 
@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin 
 
 from django import forms
+
+############ MASCOTAS #############
 
 class MascotasListado(ListView): 
     model = Mascotas
@@ -25,7 +27,7 @@ class MascotaCrear(SuccessMessageMixin, CreateView):
 
     # Redireccionamos a la página principal luego de crear un registro o mascota
     def get_success_url(self):        
-        return reverse('leer') # Redireccionamos a la vista principal 'leer' 
+        return reverse('leer_mascotas') # Redireccionamos a la vista principal 'mascotas' 
 
 class MascotaActualizar(SuccessMessageMixin, UpdateView): 
     model = Mascotas
@@ -35,7 +37,7 @@ class MascotaActualizar(SuccessMessageMixin, UpdateView):
 
     # Redireccionamos a la página principal luego de actualizar un registro o mascota
     def get_success_url(self):               
-        return reverse('leer') # Redireccionamos a la vista principal 'leer' 
+        return reverse('leer_mascotas') # Redireccionamos a la vista principal 'mascotas' 
 
 class MascotaEliminar(SuccessMessageMixin, DeleteView): 
     model = Mascotas 
@@ -46,7 +48,7 @@ class MascotaEliminar(SuccessMessageMixin, DeleteView):
     def get_success_url(self): 
         success_message = 'Mascota Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Mascota 
         messages.success (self.request, (success_message))       
-        return reverse('leer') # Redireccionamos a la vista principal 'leer'
+        return reverse('leer_mascotas') # Redireccionamos a la vista principal 'mascotas'
 
 
 
@@ -66,7 +68,7 @@ class ProductoCrear(SuccessMessageMixin, CreateView):
 
     # Redireccionamos a la página principal luego de crear un registro o Producto
     def get_success_url(self):        
-        return reverse('leer') # Redireccionamos a la vista principal 'leer' 
+        return reverse('leer_productos') # Redireccionamos a la vista principal 'productos' 
 
 class ProductoActualizar(SuccessMessageMixin, UpdateView): 
     model = Productos
@@ -76,7 +78,7 @@ class ProductoActualizar(SuccessMessageMixin, UpdateView):
 
     # Redireccionamos a la página principal luego de actualizar un registro o Producto
     def get_success_url(self):               
-        return reverse('leer') # Redireccionamos a la vista principal 'leer' 
+        return reverse('leer_productos') # Redireccionamos a la vista principal 'productos' 
 
 class ProductoEliminar(SuccessMessageMixin, DeleteView): 
     model = Productos 
@@ -87,4 +89,44 @@ class ProductoEliminar(SuccessMessageMixin, DeleteView):
     def get_success_url(self): 
         success_message = 'Producto Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Producto 
         messages.success (self.request, (success_message))       
-        return reverse('leer') # Redireccionamos a la vista principal 'leer'
+        return reverse('leer_productos') # Redireccionamos a la vista principal 'productos'
+
+
+############ SERVICIOS #############
+
+class ServiciosListado(ListView): 
+    model = Servicios
+
+class ServicioDetalle(DetailView): 
+    model = Servicios
+
+class ServicioCrear(SuccessMessageMixin, CreateView): 
+    model = Servicios
+    form = Servicios
+    fields = "__all__" 
+    success_message = 'Servicio Creado Correctamente !' # Mostramos este Mensaje luego de Crear un Servicio     
+
+    # Redireccionamos a la página principal luego de crear un registro o Servicio
+    def get_success_url(self):        
+        return reverse('leer_servicios') # Redireccionamos a la vista principal 'servicios' 
+
+class ServicioActualizar(SuccessMessageMixin, UpdateView): 
+    model = Servicios
+    form = Servicios
+    fields = "__all__"  
+    success_message = 'Producto Actualizado Correctamente !' # Mostramos este Mensaje luego de Editar un Servicio 
+
+    # Redireccionamos a la página principal luego de actualizar un registro o Servicio
+    def get_success_url(self):               
+        return reverse('leer_servicios') # Redireccionamos a la vista principal 'servicios' 
+
+class ServicioEliminar(SuccessMessageMixin, DeleteView): 
+    model = Servicios 
+    form = Servicios
+    fields = "__all__"     
+
+    # Redireccionamos a la página principal luego de eliminar un registro o Servicio
+    def get_success_url(self): 
+        success_message = 'Servicio Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Servicio 
+        messages.success (self.request, (success_message))       
+        return reverse('leer_servicios') # Redireccionamos a la vista principal 'servicios'

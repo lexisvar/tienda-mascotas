@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 #from django.views.generic import TemplateView
-from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar, ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar
+from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar
+from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar
+from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar
 #from . import views
 
 #from mascotas.views import MascotasList
@@ -29,17 +31,24 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # mascotas
-    path('mascotas/', MascotasListado.as_view(template_name = "mascotas/index.html"), name='mascotas'),
-    path('mascotas/detalle/<int:pk>', MascotaDetalle.as_view(template_name = "mascotas/detalles.html"), name='mascotas'), 
-    path('mascotas/crear', MascotaCrear.as_view(template_name = "mascotas/crear.html"), name='mascotas'),
-    path('mascotas/editar/<int:pk>', MascotaActualizar.as_view(template_name = "mascotas/actualizar.html"), name='mascotas'),    
-    path('mascotas/eliminar/<int:pk>', MascotaEliminar.as_view(), name='mascotas'), 
+    path('mascotas/', MascotasListado.as_view(template_name = "mascotas/index.html"), name='leer_mascotas'),
+    path('mascotas/detalle/<int:pk>', MascotaDetalle.as_view(template_name = "mascotas/detalles.html"), name='detalles_mascotas'), 
+    path('mascotas/crear', MascotaCrear.as_view(template_name = "mascotas/crear.html"), name='crear_mascotas'),
+    path('mascotas/editar/<int:pk>', MascotaActualizar.as_view(template_name = "mascotas/actualizar.html"), name='editar_mascotas'),    
+    path('mascotas/eliminar/<int:pk>', MascotaEliminar.as_view(), name='eliminar_mascotas'), 
 
     #productos
-    path('productos/', ProductosListado.as_view(template_name = "productos/index.html"), name='productos'), 
-    path('productos/detalle/<int:pk>', ProductoDetalle.as_view(template_name = "productos/detalles.html"), name='productos'),
-    path('productos/crear', ProductoCrear.as_view(template_name = "productos/crear.html"), name='productos'),
-    path('productos/editar/<int:pk>', ProductoActualizar.as_view(template_name = "productos/actualizar.html"), name='productos'),
-    path('productos/eliminar/<int:pk>', ProductoEliminar.as_view(), name='productos'), 
+    path('productos/', ProductosListado.as_view(template_name = "productos/index.html"), name='leer_productos'), 
+    path('productos/detalle/<int:pk>', ProductoDetalle.as_view(template_name = "productos/detalles.html"), name='detalles_productos'),
+    path('productos/crear', ProductoCrear.as_view(template_name = "productos/crear.html"), name='crear_productos'),
+    path('productos/editar/<int:pk>', ProductoActualizar.as_view(template_name = "productos/actualizar.html"), name='editar_productos'),
+    path('productos/eliminar/<int:pk>', ProductoEliminar.as_view(), name='eliminar_productos'), 
+
+    #servicios
+    path('servicios/', ServiciosListado.as_view(template_name = "servicios/index.html"), name='leer_servicios'), 
+    path('servicios/detalle/<int:pk>', ProductoDetalle.as_view(template_name = "servicios/detalles.html"), name='detalles_servicios'),
+    path('servicios/crear', ProductoCrear.as_view(template_name = "servicios/crear.html"), name='crear_servicios'),
+    path('servicios/editar/<int:pk>', ProductoActualizar.as_view(template_name = "servicios/actualizar.html"), name='editar_servicios'),
+    path('servicios/eliminar/<int:pk>', ProductoEliminar.as_view(), name='eliminar_servicios'), 
 
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

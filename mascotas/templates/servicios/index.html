@@ -30,7 +30,7 @@
 
           <div class="row">
             <div class="col-md-12">
-              <h5>Lista de Productos</h5>              
+              <h5>Lista de Servicios</h5>              
             </div>
           </div>
 
@@ -65,22 +65,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for producto in object_list %}
+                    {% for servicio in object_list %}
                     <tr>
-                      <td>{{ producto.nombre }}</td>
-                      <td>{{ producto.precio }}</td>
-                      <td>{{ producto.stock }}</td>
-                      <td><img src="{% static 'uploads/'%}{{producto.img}}" alt="{{producto.nombre}}" class="img-fluid" width="80%"></td>
+                      <td>{{ servicio.nombre }}</td>
+                      <td>{{ servicio.precio }}</td>
+                      <td>{{ servicio.stock }}</td>
+                      <td><img src="{% static 'uploads/'%}{{servicio.img}}" alt="{{servicio.nombre}}" class="img-fluid" width="80%"></td>
 
                       <td>
                         
-                        <form method="POST" action="eliminar/{{producto.id}}">
+                        <form method="POST" action="eliminar/{{servicio.id}}">
                           
                           {% csrf_token %}
                           
                           <div class="btn-group">
-                            <a href="detalle/{{producto.id}}" title="Ver" type="button" class="btn btn-success">Ver </a>
-                            <a href="editar/{{producto.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+                            <a href="detalle/{{servicio.id}}" title="Ver" type="button" class="btn btn-success">Ver </a>
+                            <a href="editar/{{servicio.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
                             <button class="btn btn-danger" onclick="return eliminar();" type="submit">
                               Eliminar
                             </button>

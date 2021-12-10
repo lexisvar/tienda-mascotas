@@ -31,4 +31,15 @@ class Productos(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-         db_table = 'productos' # Le doy de nombre 'mascotas' a nuestra tabla en la Base de Datos 
+         db_table = 'productos'
+
+# Creación de campos de la tabla 'servicios' 
+class Servicios(models.Model):
+    nombre = models.CharField(max_length=100)
+    precio = models.CharField(max_length=20)
+    img = models.FileField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+         db_table = 'servicios'
