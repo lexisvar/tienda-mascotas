@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+  
+  {% include 'partials/head.html' %} <!--head-->
+
+  <body> 
+
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+
+    {# Widget Tweaks #}
+    {% load widget_tweaks %}
+
+    <header>
+      {% include 'partials/nav.html' %} <!--nav -->
+    </header>   
+    
+    {# Archivos #}
+    {% load static %}
+
+    <main role="main">
+
+        <div class="container text-center mt-5">
+
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <h1 style="font-size: 28px;">Como crear un CRUD con Django 2 y Bootstrap 4 - Parte 2 (Python 3.7) </h1>              
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Lista de Servicios</h5>              
+            </div>
+          </div>
+
+          <div class="row mb-5">
+
+            {% include 'partials/menu.html' %} <!--nav -->
+
+            <div class="col-md-10">
+
+              <div class="table-responsive">
+
+                {% if messages %}
+                <ul class="messages list-group mb-3">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }} list-group-item list-group-item-primary"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <div align="left" class="btn_crear mb-3">
+                  <a href="crear" type="button" class="btn btn-primary">Crear</a>
+                </div>
+
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th width="35%">Nombre</th>
+                      <th>identificacion</th>
+                      <th>telefono</th>
+                      <th>Imagen</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for cliente in object_list %}
+                    <tr>
+                      <td>{{ cliente.nombre }}</td>
+                      <td>{{ cliente.identificacion }}</td>
+                      <td>{{ cliente.telefono }}</td>
+                      <td><img src="{% static 'uploads/'%}{{cliente.img}}" alt="{{cliente.nombre}}" class="img-fluid" width="80%"></td>
+
+                      <td>
+                        
+                        <form method="POST" action="eliminar/{{cliente.id}}">
+                          
+                          {% csrf_token %}
+                          
+                          <div class="btn-group">
+                            <a href="detalle/{{cliente.id}}" title="Ver" type="button" class="btn btn-success">Ver </a>
+                            <a href="editar/{{cliente.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+                            <button class="btn btn-danger" onclick="return eliminar();" type="submit">
+                              Eliminar
+                            </button>
+                            <!-- <a href="eliminar/{{mascota.id}}" title="Eliminar"><i class="fas fa-trash"></i> </a> -->                          
+                          </div>
+
+                        </form>
+
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+          </div>          
+
+          <hr>
+
+                    
+          
+          
+        </div>
+
+    </main>
+
+
+    <footer class="text-muted mt-3 mb-3">
+        <div align="center">
+          Desarrollado por <a href="https://lexisvar.me" target="_blank">Alexis Vargas</a>
+      </div> 
+    </footer>
+
+      {# JS y jQuery Bootstrap #}
+      {% bootstrap_javascript jquery='full' %} 
+
+      <script type="text/javascript">
+        function eliminar() {
+          var x = confirm("Eliminar Producto ?");
+          if (x)
+            return true;
+          else
+            return false;
+        }
+      </script>
+    
+  </body>
+</html>

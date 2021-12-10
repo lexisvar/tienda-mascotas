@@ -61,7 +61,7 @@
                       <th>Especie</th>
                       <th>Edad</th>
                       <th>Imagen</th>
-                      <th>Amo</th>
+                      <th>Cliente</th>
                       <th>Amo teléfono</th>
                       <th>Acciones</th>
                     </tr>
@@ -73,7 +73,7 @@
                       <td>{{ mascota.especie }}</td>
                       <td>{{ mascota.edad }}</td>
                       <td><img src="{% static 'uploads/'%}{{mascota.img}}" alt="{{mascota.nombre}}" class="img-fluid" width="80%"></td>
-                      <td>{{ mascota.amo }}</td>
+                      <td>{{ mascota.cliente_id }}</td>
                       <td>{{ mascota.amo_telefono }}</td>
 
                       <td>

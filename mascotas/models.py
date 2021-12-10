@@ -1,6 +1,19 @@
 from django.db import models
 from django.utils import timezone
 
+
+# Creación de campos de la tabla 'clientes' 
+class Clientes(models.Model):
+    nombre = models.CharField(max_length=100)
+    identificacion = models.CharField(max_length=10, unique=True)
+    telefono = models.CharField(max_length=15, null=True)
+    img = models.FileField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+         db_table = 'clientes'
+
 # Creación de campos de la tabla 'mascotas' 
 class Mascotas(models.Model):
     SEXOS= (
@@ -12,8 +25,7 @@ class Mascotas(models.Model):
     edad = models.IntegerField()
     sexo = models.CharField(max_length=6, choices=SEXOS, default='m')
     img = models.FileField()
-    amo = models.CharField(max_length=100)
-    amo_telefono = models.CharField(max_length=100)
+    cliente = models.ForeignKey(Clientes, on_delete=models.CASCADE, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -43,25 +55,6 @@ class Servicios(models.Model):
 
     class Meta:
          db_table = 'servicios'
-
-class Clientes(models.Model):
-    nombre = models.CharField(max_length=100)
-    identificacion = models.CharField(max_length=10, unique=True)
-    img = models.FileField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-         db_table = 'clientes'
-
-class ClientesMascotas(models.Model):
-    cliente = models.ForeignKey(Clientes, on_delete=models.CASCADE)
-    mascota = models.ForeignKey(Mascotas, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-         db_table = 'clientes_mascotas'
 
 class Ventas(models.Model):
     servicio = models.ForeignKey(Servicios, on_delete=models.CASCADE, null=True)

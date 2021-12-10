@@ -19,6 +19,7 @@ from django.urls import path
 from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar
 from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar
 from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar
+from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar
 #from . import views
 
 #from mascotas.views import MascotasList
@@ -46,9 +47,16 @@ urlpatterns = [
 
     #servicios
     path('servicios/', ServiciosListado.as_view(template_name = "servicios/index.html"), name='leer_servicios'), 
-    path('servicios/detalle/<int:pk>', ProductoDetalle.as_view(template_name = "servicios/detalles.html"), name='detalles_servicios'),
-    path('servicios/crear', ProductoCrear.as_view(template_name = "servicios/crear.html"), name='crear_servicios'),
-    path('servicios/editar/<int:pk>', ProductoActualizar.as_view(template_name = "servicios/actualizar.html"), name='editar_servicios'),
-    path('servicios/eliminar/<int:pk>', ProductoEliminar.as_view(), name='eliminar_servicios'), 
+    path('servicios/detalle/<int:pk>', ServicioDetalle.as_view(template_name = "servicios/detalles.html"), name='detalles_servicios'),
+    path('servicios/crear', ServicioCrear.as_view(template_name = "servicios/crear.html"), name='crear_servicios'),
+    path('servicios/editar/<int:pk>', ServicioActualizar.as_view(template_name = "servicios/actualizar.html"), name='editar_servicios'),
+    path('servicios/eliminar/<int:pk>', ServicioEliminar.as_view(), name='eliminar_servicios'), 
+
+    #servicios
+    path('clientes/', ClientesListado.as_view(template_name = "clientes/index.html"), name='leer_clientes'), 
+    path('clientes/detalle/<int:pk>', ClienteDetalle.as_view(template_name = "clientes/detalles.html"), name='detalles_clientes'),
+    path('clientes/crear', ClienteCrear.as_view(template_name = "clientes/crear.html"), name='crear_clientes'),
+    path('clientes/editar/<int:pk>', ClienteActualizar.as_view(template_name = "clientes/actualizar.html"), name='editar_clientes'),
+    path('clientes/eliminar/<int:pk>', ClienteEliminar.as_view(), name='eliminar_clientes'), 
 
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
