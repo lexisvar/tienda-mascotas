@@ -73,7 +73,7 @@
                       <td>{{ mascota.especie }}</td>
                       <td>{{ mascota.edad }}</td>
                       <td><img src="{% static 'uploads/'%}{{mascota.img}}" alt="{{mascota.nombre}}" class="img-fluid" width="80%"></td>
-                      <td>{{ mascota.cliente_id }}</td>
+                      <td>{{ mascota.cliente.nombre }}</td>
                       <td>{{ mascota.amo_telefono }}</td>
 
                       <td>

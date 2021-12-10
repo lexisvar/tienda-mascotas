@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 
-# Creación de campos de la tabla 'clientes' 
+# Creación de campos de la tabla 'clientes'
 class Clientes(models.Model):
     nombre = models.CharField(max_length=100)
     identificacion = models.CharField(max_length=10, unique=True)
@@ -11,14 +11,19 @@ class Clientes(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-         db_table = 'clientes'
+    def __str__(self):
+        return self.nombre
 
-# Creación de campos de la tabla 'mascotas' 
+    class Meta:
+        db_table = 'clientes'
+
+# Creación de campos de la tabla 'mascotas'
+
+
 class Mascotas(models.Model):
-    SEXOS= (
-      ('m','MACHO'),
-      ('h', 'HEMBRA'),
+    SEXOS = (
+        ('m', 'MACHO'),
+        ('h', 'HEMBRA'),
     )
     nombre = models.CharField(max_length=100)
     especie = models.CharField(max_length=100)
@@ -30,10 +35,15 @@ class Mascotas(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-         db_table = 'mascotas' # Le doy de nombre 'mascotas' a nuestra tabla en la Base de Datos 
+    def __str__(self):
+        return self.nombre
 
-# Creación de campos de la tabla 'productos' 
+    class Meta:
+        db_table = 'mascotas'  # Le doy de nombre 'mascotas' a nuestra tabla en la Base de Datos
+
+# Creación de campos de la tabla 'productos'
+
+
 class Productos(models.Model):
     nombre = models.CharField(max_length=100)
     precio = models.CharField(max_length=20)
@@ -43,9 +53,11 @@ class Productos(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-         db_table = 'productos'
+        db_table = 'productos'
 
-# Creación de campos de la tabla 'servicios' 
+# Creación de campos de la tabla 'servicios'
+
+
 class Servicios(models.Model):
     nombre = models.CharField(max_length=100)
     precio = models.CharField(max_length=20)
@@ -54,15 +66,18 @@ class Servicios(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-         db_table = 'servicios'
+        db_table = 'servicios'
+
 
 class Ventas(models.Model):
-    servicio = models.ForeignKey(Servicios, on_delete=models.CASCADE, null=True)
-    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, null=True)
+    servicio = models.ForeignKey(
+        Servicios, on_delete=models.CASCADE, null=True)
+    producto = models.ForeignKey(
+        Productos, on_delete=models.CASCADE, null=True)
     cantidad = models.IntegerField()
     total = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-         db_table = 'ventas'
+        db_table = 'ventas'
