@@ -43,3 +43,33 @@ class Servicios(models.Model):
 
     class Meta:
          db_table = 'servicios'
+
+class Clientes(models.Model):
+    nombre = models.CharField(max_length=100)
+    identificacion = models.CharField(max_length=10, unique=True)
+    img = models.FileField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+         db_table = 'clientes'
+
+class ClientesMascotas(models.Model):
+    cliente = models.ForeignKey(Clientes, on_delete=models.CASCADE)
+    mascota = models.ForeignKey(Mascotas, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+         db_table = 'clientes_mascotas'
+
+class Ventas(models.Model):
+    servicio = models.ForeignKey(Servicios, on_delete=models.CASCADE, null=True)
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, null=True)
+    cantidad = models.IntegerField()
+    total = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+         db_table = 'ventas'
