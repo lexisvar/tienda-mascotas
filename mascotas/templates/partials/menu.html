@@ -2,8 +2,9 @@
   <h6 class="mt-4"><strong>Menú</strong></h6> 
   <ul class="list-group list-group-flush menu">
     <li class="list-group-item ">Dashboard</li>
-    <li class="list-group-item {% if request.resolver_match.url_name == "mascotas" %}active{% endif %}"> <a href="/mascotas"> Mascotas </a> </li>
-    <li class="list-group-item {% if request.resolver_match.url_name == "productos" %}active{% endif %}"> <a href="/productos"> Productos </a> </li>
+    <li class="list-group-item {% if '/mascotas' in request.path %}active{% endif %}"> <a href="/mascotas"> Mascotas </a> </li>
+    <li class="list-group-item {% if '/productos' in request.path %}active{% endif %}"> <a href="/productos"> Productos </a> </li>
+    <li class="list-group-item {% if '/servicios' in request.path %}active{% endif %}"> <a href="/servicios"> Servicios </a> </li>
     <li class="list-group-item">Configuración</li>
   </ul>
 </div>
