@@ -15,6 +15,13 @@ Desarrollo de una Aplicación Web de tipo “Tienda para Mascotas” que ofrecer
 
 # Etapa del proyecto
 
+* Dashboard []
+* CRUD Clientes [x]
 * CRUD Mascotas [x]
 * CRUD Productos [x]
-* CRUD Clientes []
+* CRUD Servicios [x]
+* Configuraciones []
+* Ventas []
+* Reportes []
+* Diagrama de clases []
+* Casos de Uso []
