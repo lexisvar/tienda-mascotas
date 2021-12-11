@@ -20,6 +20,7 @@ from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, Mascot
 from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar
 from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar
 from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar
+from mascotas.views import Dashboard
 #from . import views
 
 #from mascotas.views import MascotasList
@@ -30,6 +31,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
+
+    # mascotas
+    path('dashboard/', Dashboard.as_view(template_name = "dashboard/index.html"), name='dashboard'),
 
     # mascotas
     path('mascotas/', MascotasListado.as_view(template_name = "mascotas/index.html"), name='leer_mascotas'),

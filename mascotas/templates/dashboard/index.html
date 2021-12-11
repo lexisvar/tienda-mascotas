@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+  
+  {% include 'partials/head.html' %} <!--head-->
+
+  <body> 
+
+    {# Cargamos la librería #}
+    {% load bootstrap4 %}
+
+    {# Widget Tweaks #}
+    {% load widget_tweaks %}
+
+    <header>
+      {% include 'partials/nav.html' %} <!--nav -->
+    </header>   
+    
+    {# Archivos #}
+    {% load static %}
+
+    <main role="main">
+
+        <div class="container text-center mt-5">
+
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <h1 style="font-size: 28px;">Tienda para Mascotas</h1>              
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Dashboard</h5>              
+            </div>
+          </div>
+
+          <div class="row mb-5">
+
+            <div class="col-md-10">               
+
+              <div class="container">
+                <div class="row g-2">
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">Custom column padding</div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">Custom column padding</div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">Custom column padding</div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">Custom column padding</div>
+                  </div>
+                </div>
+              </div>                
+
+            </div>
+
+          </div>          
+
+          <hr>
+
+                    
+          
+          
+        </div>
+
+    </main>
+
+
+    <footer class="text-muted mt-3 mb-3">
+        <div align="center">
+          Desarrollado por <a href="https://lexisvar.me" target="_blank">Alexis Vargas</a>
+      </div> 
+    </footer>
+
+      {# JS y jQuery Bootstrap #}
+      {% bootstrap_javascript jquery='full' %} 
+
+      <script type="text/javascript">
+        function eliminar() {
+          var x = confirm("Eliminar Producto ?");
+          if (x)
+            return true;
+          else
+            return false;
+        }
+      </script>
+    
+  </body>
+</html>

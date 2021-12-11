@@ -1,7 +1,7 @@
 <div class="card col-md-2">
   <h6 class="mt-4"><strong>Menú</strong></h6> 
   <ul class="list-group list-group-flush menu">
-    <li class="list-group-item ">Dashboard</li>
+    <li class="list-group-item {% if '/dashboard' in request.path %}active{% endif %}"><a href="/dashboard"> Dashboard </a></li>
     <li class="list-group-item {% if '/clientes' in request.path %}active{% endif %}"> <a href="/clientes"> Clientes </a> </li>    
     <li class="list-group-item {% if '/mascotas' in request.path %}active{% endif %}"> <a href="/mascotas"> Mascotas </a> </li>
     <li class="list-group-item {% if '/productos' in request.path %}active{% endif %}"> <a href="/productos"> Productos </a> </li>

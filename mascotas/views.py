@@ -11,6 +11,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from django import forms
 
+############ DASHBOARD #############
+
+class Dashboard(ListView): 
+    model = Mascotas
+
 ############ MASCOTAS #############
 
 class MascotasListado(ListView): 
