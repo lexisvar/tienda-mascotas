@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+mascotas/node_modules/*
 build/
 develop-eggs/
 dist/

@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from django.views.generic import ListView, DetailView 
+from django.views.generic import ListView, DetailView
+from django.views.generic.base import View 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ..models import Productos
 
@@ -50,3 +51,31 @@ class ProductoEliminar(SuccessMessageMixin, DeleteView):
         success_message = 'Producto Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Producto 
         messages.success (self.request, (success_message))       
         return reverse('leer_productos') # Redireccionamos a la vista principal 'productos'
+
+class ProductoBuscar(View): 
+
+    def post(self, request):
+        search = request.POST['search']
+        queryset = Productos.objects.filter(nombre__icontains=search).values()
+        print(queryset) 
+        data = {
+            "name": "Vaibhav",
+            "age": 20,
+            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
+            "productos": list(queryset)
+        }
+        return JsonResponse(data)
+    
+    def get(self, request):
+        print(request.GET)
+        search = request.GET.get('search')
+        print(search)
+        queryset = Productos.objects.filter(nombre__icontains=search).values()
+        print(queryset) 
+        data = {
+            "name": "Vaibhav",
+            "age": 20,
+            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
+            "productos": list(queryset)
+        }
+        return JsonResponse(data)
