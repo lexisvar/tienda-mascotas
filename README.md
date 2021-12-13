@@ -6,8 +6,9 @@ Desarrollo de una Aplicación Web de tipo “Tienda para Mascotas” que ofrecer
 * Python 3.8
 * Django-admin 4.0
 * Bootstrap 4.0
+* Vue2
 * MySql (MariaDB)
-* Servidor Ubuntu 20.04 (Instancia en AWS)
+* Servidor Ubuntu 20.04 (Instancia en AWS) - [http://mascotas.lexisvar.me:8000/](http://mascotas.lexisvar.me:8000/)
 
 # Patrón
 
