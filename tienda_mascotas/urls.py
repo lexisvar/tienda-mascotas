@@ -34,6 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # mascotas
+    path('', Dashboard.as_view(template_name = "dashboard/index.html"), name='dashboard'),
     path('dashboard/', Dashboard.as_view(template_name = "dashboard/index.html"), name='dashboard'),
 
     # mascotas
