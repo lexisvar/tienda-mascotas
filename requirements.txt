@@ -1,0 +1,11 @@
+asgiref==3.4.1
+backports.zoneinfo==0.2.1
+beautifulsoup4==4.10.0
+bootstrap4==0.1.0
+clear-cache==1.0.0
+Django==4.0
+django-bootstrap4==21.1
+django-widget-tweaks==1.4.9
+mysqlclient==2.1.0
+soupsieve==2.3.1
+sqlparse==0.4.2
