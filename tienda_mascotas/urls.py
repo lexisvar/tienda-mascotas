@@ -20,6 +20,7 @@ from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, Mascot
 from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar
 from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar
 from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar
+from mascotas.views import VentasListado, VentaDetalle, VentaCrear, VentaActualizar, VentaEliminar
 from mascotas.views import Dashboard
 #from . import views
 
@@ -56,11 +57,18 @@ urlpatterns = [
     path('servicios/editar/<int:pk>', ServicioActualizar.as_view(template_name = "servicios/actualizar.html"), name='editar_servicios'),
     path('servicios/eliminar/<int:pk>', ServicioEliminar.as_view(), name='eliminar_servicios'), 
 
-    #servicios
+    #clientes
     path('clientes/', ClientesListado.as_view(template_name = "clientes/index.html"), name='leer_clientes'), 
     path('clientes/detalle/<int:pk>', ClienteDetalle.as_view(template_name = "clientes/detalles.html"), name='detalles_clientes'),
     path('clientes/crear', ClienteCrear.as_view(template_name = "clientes/crear.html"), name='crear_clientes'),
     path('clientes/editar/<int:pk>', ClienteActualizar.as_view(template_name = "clientes/actualizar.html"), name='editar_clientes'),
     path('clientes/eliminar/<int:pk>', ClienteEliminar.as_view(), name='eliminar_clientes'), 
+
+    #clientes
+    path('ventas/', VentasListado.as_view(template_name = "ventas/index.html"), name='leer_ventas'), 
+    path('ventas/detalle/<int:pk>', VentaDetalle.as_view(template_name = "ventas/detalles.html"), name='detalles_ventas'),
+    path('ventas/crear', VentaCrear.as_view(template_name = "ventas/crear.html"), name='crear_ventas'),
+    path('ventas/editar/<int:pk>', VentaActualizar.as_view(template_name = "ventas/actualizar.html"), name='editar_ventas'),
+    path('ventas/eliminar/<int:pk>', VentaEliminar.as_view(), name='eliminar_ventas'), 
 
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

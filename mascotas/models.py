@@ -52,6 +52,9 @@ class Productos(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nombre
+
     class Meta:
         db_table = 'productos'
 
@@ -65,19 +68,30 @@ class Servicios(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nombre
+
     class Meta:
         db_table = 'servicios'
 
 
 class Ventas(models.Model):
-    servicio = models.ForeignKey(
-        Servicios, on_delete=models.CASCADE, null=True)
-    producto = models.ForeignKey(
-        Productos, on_delete=models.CASCADE, null=True)
-    cantidad = models.IntegerField()
+    cliente = models.ForeignKey(Clientes, on_delete=models.CASCADE, null=True)
+    productos = models.ManyToManyField(Productos, blank=True, through='Detalles', related_name='productos')
+    servicios = models.ManyToManyField(Servicios, blank=True, through='Detalles', related_name='servicios')
     total = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'ventas'
+
+class Detalles(models.Model):
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, null=True)
+    servicio = models.ForeignKey(Servicios, on_delete=models.CASCADE, null=True)
+    venta = models.ForeignKey(Ventas, on_delete=models.CASCADE, null=True)
+    cantidad = models.IntegerField()
+    total = models.FloatField()
+
+    class Meta:
+        db_table = 'detalles'
