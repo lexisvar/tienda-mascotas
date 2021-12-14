@@ -27,8 +27,9 @@ Esta aplicación está escrita en python usando el framework Django, se hace uso
 * Ventas [x]
 * Sistema de usuarios []
 * Compras []
-* Reportes []
-* Diagrama de clases []
+* Reportes [x] -> Módulo de clientes, ventas, ambos se consiguen con un click en dashboard
+* Diagrama de clases [x]
+* Modelo ER [x]
 * Casos de Uso []
 
 # NOTA
