@@ -239,13 +239,16 @@
               if(this.containsKey(this.customer_selected, 'id')){
                 if(this.total>1){
                   data = {
-                    search : "",
+                    cliente : this.customer_selected.id,
+                    productos : this.productos_selected,
+                    servicios : this.servicios_selected,
+                    total : this.total
                   }
                   axios
                     .post('/ventas/guardar', data)
                     .then(response => {
                       if(response.status == 200){
-                        console.log(response)
+                        location.href = '/ventas';
                       }
                     })
                     .catch(error => {

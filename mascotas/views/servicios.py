@@ -54,11 +54,8 @@ class ServicioEliminar(SuccessMessageMixin, DeleteView):
 class ServicioBuscar(View):
     
     def get(self, request):
-        print(request.GET)
         search = request.GET.get('search')
-        print(search)
         queryset = Servicios.objects.filter(nombre__icontains=search).values()
-        print(queryset) 
         data = {           
             "servicios": list(queryset)
         }

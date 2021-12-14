@@ -20,7 +20,7 @@ from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, Mascot
 from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar, ProductoBuscar
 from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar, ServicioBuscar
 from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar, ClienteBuscar
-from mascotas.views import VentasListado, VentaDetalle, VentaCrear, VentaActualizar, VentaEliminar
+from mascotas.views import VentasListado, VentaDetalle, VentaCrear, VentaActualizar, VentaEliminar, VentasGuardar
 from mascotas.views import Dashboard
 #from . import views
 
@@ -71,11 +71,13 @@ urlpatterns = [
 
     path('clientes/buscar', ClienteBuscar.as_view(), name='buscar_clientes'), 
 
-    #clientes
+    #ventas
     path('ventas/', VentasListado.as_view(template_name = "ventas/index.html"), name='leer_ventas'), 
     path('ventas/detalle/<int:pk>', VentaDetalle.as_view(template_name = "ventas/detalles.html"), name='detalles_ventas'),
     path('ventas/crear', VentaCrear.as_view(template_name = "ventas/crear.html"), name='crear_ventas'),
     path('ventas/editar/<int:pk>', VentaActualizar.as_view(template_name = "ventas/actualizar.html"), name='editar_ventas'),
     path('ventas/eliminar/<int:pk>', VentaEliminar.as_view(), name='eliminar_ventas'), 
+
+    path('ventas/guardar', VentasGuardar.as_view(), name='guardar_ventas'), 
 
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
