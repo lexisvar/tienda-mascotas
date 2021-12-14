@@ -14,7 +14,7 @@ Desarrollo de una Aplicación Web de tipo “Tienda para Mascotas” que ofrecer
 
 * MVC aúnque como aclaración, al controlador se le llama vista y a la vista plantilla. 
 
-# Etapa del proyecto
+# Módulos del proyecto
 
 * Dashboard - estadísticas [x]
 * CRUD Clientes [x]
@@ -23,7 +23,12 @@ Desarrollo de una Aplicación Web de tipo “Tienda para Mascotas” que ofrecer
 * CRUD Servicios [x]
 * Configuraciones []
 * Ventas [x]
+* Sistema de usuarios []
 * Compras []
 * Reportes []
 * Diagrama de clases []
 * Casos de Uso []
+
+# NOTA
+
+Los módulos que quedan sin desarrollar, se pueden agregar más adelante. Pero para esta primera etapa se considera que la aplicación ya es funcional.
