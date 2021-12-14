@@ -41,7 +41,7 @@
                 	<h4>Crear</h4>
                   <div id="vue-app">
                     <div class="row">
-                      <div v-if="mostrar_mensaje" class="col alert alert-primary" role="alert">
+                      <div v-if="mostrar_mensaje" class="col alert alert-warning" role="alert">
                         [[mensaje]]
                       </div>
                     </div>
@@ -52,7 +52,7 @@
                         <v-select v-model="product_selected" :options="list_product" label="nombre" ></v-select>
                       </div>
                       <div class="col-2">
-                        <input type="number" class="form-control" name="cantidad[]" placeholder="Cantidad">
+                        <input v-model="cantidad_producto" type="number" class="form-control" name="cantidad_producto" placeholder="Cantidad">
                       </div>
                       <div class="col">
                         <div class="icon-big text-center">
@@ -60,7 +60,40 @@
                         </div>
                       </div>                      
                     </div>
-                    <div class="row">                      
+                    <div class="row">
+                      
+                      <h4>Servicios</h4>
+                      <div class="col-8">
+                        <v-select v-model="service_selected" :options="list_service" label="nombre" ></v-select>
+                      </div>
+                      <div class="col-2">
+                        <input v-model="cantidad_servicio" type="number" class="form-control" name="cantidad_servicio" placeholder="Cantidad">
+                      </div>
+                      <div class="col">
+                        <div class="icon-big text-center">
+                          <i class="teal fas fa-plus" role="button" @click="agregarServicios"></i>
+                        </div>
+                      </div>                      
+                    </div>
+                    <div class="row">
+                      <table class="table">                       
+                        <tbody>
+                          <tr v-for="producto in productos_selected">
+                            <td>[[producto.nombre]]</td>
+                            <td>[[producto.precio]]</td>
+                            <td>[[producto.cantidad]]</td>
+                            <td>[[producto.total]]</td>
+                          </tr>
+
+                          <tr v-for="servicio in servicios_selected">
+                            <td>[[servicio.nombre]]</td>
+                            <td>[[servicio.precio]]</td>
+                            <td>[[servicio.cantidad]]</td>
+                            <td>[[servicio.total]]</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
                     </div> 
                   </div>
             </div>
@@ -93,18 +126,18 @@
           mostrar_mensaje : false,
           mensaje: 'Hello Vue!',
           text : '',
-          list_product: [
-            {
-              id:1,
-              nombre:"Alexis",
-            }
-          ],
+          list_product: [],
+          list_service: [],
           product_selected : {},
+          service_selected : {},
           cantidad_producto : null,
-          productos_selected : []
+          cantidad_servicio : null,
+          productos_selected : [],
+          servicios_selected : []
         },
         created(){
           this.productos()
+          this.servicios()
         },
         watch:{
           text(val){
@@ -127,20 +160,70 @@
                   console.log(error);
                 });
           },
+          async servicios(){
+              params = {
+                search : "",
+              }
+              axios
+                .get('/servicios/buscar', {params})
+                .then(response => {
+                  if(response.status == 200){
+                    this.list_service = response.data.servicios
+                  }
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+          },
           agregarProductos(){
-            if(this.product_selected){
-
+            if(this.containsKey(this.product_selected, 'id')){
+              if(this.cantidad_producto){
+                let data = {
+                  id : this.product_selected.id,
+                  nombre : this.product_selected.nombre,
+                  precio : this.product_selected.precio,
+                  stock : this.product_selected.stock,
+                  cantidad : this.cantidad_producto,
+                  total : this.cantidad_producto * this.product_selected.precio,
+                }
+                this.productos_selected.push(data) 
+                this.cantidad_producto = null
+              }else{
+                this.mostrarMsg("debe agregar la cantidad")
+              } 
             }else{
               this.mostrarMsg("debe tener selecionado")
               return false
             }
-            console.log(this.product_selected)
+          },
+          agregarServicios(){
+            if(this.containsKey(this.service_selected, 'id')){
+              if(this.cantidad_servicio){
+                let data = {
+                  id : this.service_selected.id,
+                  nombre : this.service_selected.nombre,
+                  precio : this.service_selected.precio,
+                  cantidad : this.cantidad_servicio,
+                  total : this.cantidad_servicio * this.service_selected.precio,
+                }
+                this.servicios_selected.push(data) 
+                this.cantidad_servicio = null
+              }else{
+                this.mostrarMsg("debe agregar la cantidad")
+              } 
+            }else{
+              this.mostrarMsg("debe tener selecionado")
+              return false
+            }
           },
           mostrarMsg(mensaje){
             this.mensaje = mensaje
 
             this.mostrar_mensaje = true
             setTimeout(() => this.mostrar_mensaje = false, 3000);
+          },
+          containsKey(obj, key ) {
+            return Object.keys(obj).includes(key);
           }
         }
       })

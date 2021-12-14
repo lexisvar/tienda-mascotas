@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 from django.views.generic import ListView, DetailView 
+from django.views.generic.base import View 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ..models import Servicios
 
@@ -49,3 +50,31 @@ class ServicioEliminar(SuccessMessageMixin, DeleteView):
         success_message = 'Servicio Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Servicio 
         messages.success (self.request, (success_message))       
         return reverse('leer_servicios') # Redireccionamos a la vista principal 'servicios'
+
+class ServicioBuscar(View): 
+
+    def post(self, request):
+        search = request.POST['search']
+        queryset = Servicios.objects.filter(nombre__icontains=search).values()
+        print(queryset) 
+        data = {
+            "name": "Vaibhav",
+            "age": 20,
+            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
+            "servicios": list(queryset)
+        }
+        return JsonResponse(data)
+    
+    def get(self, request):
+        print(request.GET)
+        search = request.GET.get('search')
+        print(search)
+        queryset = Servicios.objects.filter(nombre__icontains=search).values()
+        print(queryset) 
+        data = {
+            "name": "Vaibhav",
+            "age": 20,
+            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
+            "servicios": list(queryset)
+        }
+        return JsonResponse(data)

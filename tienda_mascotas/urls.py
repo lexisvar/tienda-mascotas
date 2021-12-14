@@ -18,7 +18,7 @@ from django.urls import path
 #from django.views.generic import TemplateView
 from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar
 from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar, ProductoBuscar
-from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar
+from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar, ServicioBuscar
 from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar
 from mascotas.views import VentasListado, VentaDetalle, VentaCrear, VentaActualizar, VentaEliminar
 from mascotas.views import Dashboard
@@ -59,6 +59,8 @@ urlpatterns = [
     path('servicios/crear', ServicioCrear.as_view(template_name = "servicios/crear.html"), name='crear_servicios'),
     path('servicios/editar/<int:pk>', ServicioActualizar.as_view(template_name = "servicios/actualizar.html"), name='editar_servicios'),
     path('servicios/eliminar/<int:pk>', ServicioEliminar.as_view(), name='eliminar_servicios'), 
+
+    path('servicios/buscar', ServicioBuscar.as_view(), name='buscar_servicios'), 
 
     #clientes
     path('clientes/', ClientesListado.as_view(template_name = "clientes/index.html"), name='leer_clientes'), 
