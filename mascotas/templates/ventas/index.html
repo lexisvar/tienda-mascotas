@@ -57,30 +57,28 @@
                 <table class="table table-striped table-hover">
                   <thead>
                     <tr>
-                      <th width="35%">Nombre</th>
-                      <th>Precio</th>
-                      <th>Stock</th>
-                      <th>Imagen</th>
+                      <th width="35%">Fecha</th>
+                      <th>Total</th>
+                      <th>Cliente</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for servicio in object_list %}
+                    {% for venta in object_list %}
                     <tr>
-                      <td>{{ servicio.nombre }}</td>
-                      <td>{{ servicio.precio }}</td>
-                      <td>{{ servicio.stock }}</td>
-                      <td><img src="{% static 'uploads/'%}{{servicio.img}}" alt="{{servicio.nombre}}" class="img-fluid" width="80%"></td>
+                      <td>{{ venta.created_at }}</td>
+                      <td>{{ venta.total }}</td>
+                      <td>{{ venta.cliente }}</td>
 
                       <td>
                         
-                        <form method="POST" action="eliminar/{{servicio.id}}">
+                        <form method="POST" action="eliminar/{{venta.id}}">
                           
                           {% csrf_token %}
                           
                           <div class="btn-group">
-                            <a href="detalle/{{servicio.id}}" title="Ver" type="button" class="btn btn-success">Ver </a>
-                            <a href="editar/{{servicio.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+                            <a href="detalle/{{venta.id}}" title="Ver" type="button" class="btn btn-success">Ver </a>
+                            {% comment %} <a href="editar/{{venta.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a> {% endcomment %}
                             <button class="btn btn-danger" onclick="return eliminar();" type="submit">
                               Eliminar
                             </button>
