@@ -1,6 +1,8 @@
 # Tienda de Mascotas
 Desarrollo de una Aplicación Web de tipo “Tienda para Mascotas” que ofrecerá productos (inventario y venta de productos entre otros) y servicios (consulta veterinaria, vacunación, urgencias entre otros) relacionados con el tema.
 
+Esta aplicación está escrita en python usando el framework Django, se hace uso de los crud predefinidos en el framework, pero también se implementó request en json desde Vuejs usando la librería axios.
+
 # Tecnología
 
 * Python 3.8

@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+            <div class="col-sm-6 col-md-6 col-lg-3 mt-3" role="button" onclick="exportar_ventas()">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -113,7 +113,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+            <div class="col-sm-6 col-md-6 col-lg-3 mt-3" role="button" onclick="exportar_clientes()">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -166,6 +166,13 @@
             return true;
           else
             return false;
+        }
+
+        function exportar_ventas(){
+          window.open('/ventas/exportar');
+        }
+        function exportar_clientes(){
+          window.open('/clientes/exportar');
         }
       </script>
     

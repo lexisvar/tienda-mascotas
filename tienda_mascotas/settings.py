@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'clear_cache',
     'bootstrap4',
     'widget_tweaks',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

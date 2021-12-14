@@ -1,3 +1,4 @@
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -5,6 +6,11 @@ from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus.doctemplate import SimpleDocTemplate
+from reportlab.platypus.flowables import Spacer
+from reportlab.lib.units import inch
+from reportlab.platypus.paragraph import Paragraph
 from ..models import Clientes
 
 from django.urls import reverse
@@ -60,3 +66,30 @@ class ClienteBuscar(View):
             "clientes": list(queryset)
         }
         return JsonResponse(data)
+
+class ClientesExportar(View):
+    
+    def get(self, request):
+        doc = SimpleDocTemplate("/tmp/clientes.pdf")
+        styles = getSampleStyleSheet()
+        Story = [Spacer(1,2*inch)]
+        style = styles["Normal"]
+        Story.append(Paragraph('REPORTE DE Clientes', styles['title']))
+        Story.append(Paragraph('', styles['title']))
+
+        clientes = Clientes.objects.all()        
+
+        for cliente in clientes:
+          print(cliente.created_at)
+          bogustext = ("Nombre:  "+str(cliente.nombre)+ " Identificación:  "+cliente.identificacion + " Teléfono:  "+str(cliente.telefono)) 
+          p = Paragraph(bogustext, style)
+          Story.append(p)
+          Story.append(Spacer(1,0.2*inch))
+
+        doc.build(Story)
+
+        fs = FileSystemStorage("/tmp")
+        with fs.open("clientes.pdf") as pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="clientes.pdf"'
+            return response

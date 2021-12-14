@@ -19,8 +19,8 @@ from django.urls import path
 from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar
 from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar, ProductoBuscar
 from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar, ServicioBuscar
-from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar, ClienteBuscar
-from mascotas.views import VentasListado, VentaDetalle, VentaCrear, VentaActualizar, VentaEliminar, VentasGuardar
+from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar, ClienteBuscar, ClientesExportar
+from mascotas.views import VentasListado, VentaDetalle, VentaCrear, VentaActualizar, VentaEliminar, VentasGuardar, VentasExportar
 from mascotas.views import Dashboard
 #from . import views
 
@@ -70,6 +70,7 @@ urlpatterns = [
     path('clientes/eliminar/<int:pk>', ClienteEliminar.as_view(), name='eliminar_clientes'), 
 
     path('clientes/buscar', ClienteBuscar.as_view(), name='buscar_clientes'), 
+    path('clientes/exportar', ClientesExportar.as_view(), name='exportar_clientes'), 
 
     #ventas
     path('ventas/', VentasListado.as_view(template_name = "ventas/index.html"), name='leer_ventas'), 
@@ -79,5 +80,6 @@ urlpatterns = [
     path('ventas/eliminar/<int:pk>', VentaEliminar.as_view(), name='eliminar_ventas'), 
 
     path('ventas/guardar', VentasGuardar.as_view(), name='guardar_ventas'), 
+    path('ventas/exportar', VentasExportar.as_view(), name='exportar_ventas'), 
 
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

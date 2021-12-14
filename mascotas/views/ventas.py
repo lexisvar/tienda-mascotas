@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 import json
+from io import BytesIO
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View 
@@ -9,6 +12,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ..models import Ventas,Productos,Servicios,Detalles
 from django.db import transaction
 
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import inch
 
 from django.urls import reverse
 
@@ -107,3 +116,30 @@ class VentasGuardar(View):
             "mensaje": "venta exitosa"
         }
         return JsonResponse(data)
+
+class VentasExportar(View):
+    
+    def get(self, request):
+        doc = SimpleDocTemplate("/tmp/ventas.pdf")
+        styles = getSampleStyleSheet()
+        Story = [Spacer(1,2*inch)]
+        style = styles["Normal"]
+        Story.append(Paragraph('REPORTE DE VENTAS', styles['title']))
+        Story.append(Paragraph('', styles['title']))
+
+        ventas = Ventas.objects.all()        
+
+        for venta in ventas:
+          print(venta.created_at)
+          bogustext = ("Fecha:  "+str(venta.created_at)+ " Cliente:  "+venta.cliente.nombre + " Total:  "+str(venta.total)) 
+          p = Paragraph(bogustext, style)
+          Story.append(p)
+          Story.append(Spacer(1,0.2*inch))
+
+        doc.build(Story)
+
+        fs = FileSystemStorage("/tmp")
+        with fs.open("ventas.pdf") as pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="ventas.pdf"'
+            return response
