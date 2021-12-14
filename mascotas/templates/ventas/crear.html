@@ -80,16 +80,22 @@
                         <tbody>
                           <tr v-for="producto in productos_selected">
                             <td>[[producto.nombre]]</td>
-                            <td>[[producto.precio]]</td>
+                            <td>[[producto.precio | toCurrency]]</td>
                             <td>[[producto.cantidad]]</td>
-                            <td>[[producto.total]]</td>
+                            <td>[[producto.total | toCurrency]]</td>
                           </tr>
 
                           <tr v-for="servicio in servicios_selected">
                             <td>[[servicio.nombre]]</td>
-                            <td>[[servicio.precio]]</td>
+                            <td>[[servicio.precio | toCurrency]]</td>
                             <td>[[servicio.cantidad]]</td>
-                            <td>[[servicio.total]]</td>
+                            <td>[[servicio.total | toCurrency]]</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>[[total | toCurrency]]</td>
                           </tr>
                           
                         </tbody>
@@ -119,6 +125,16 @@
    
     <script>
       Vue.component('v-select', VueSelect.VueSelect)
+      Vue.filter('toCurrency', function (value) {
+          if (typeof value !== "number") {
+              return value;
+          }
+          var formatter = new Intl.NumberFormat('es-CO', {
+              style: 'currency',
+              currency: 'COP'
+          });
+          return formatter.format(value);
+      });
       var app = new Vue({
         delimiters: ["[[", "]]"],
         el: '#vue-app',
@@ -138,6 +154,20 @@
         created(){
           this.productos()
           this.servicios()
+        },
+        computed:{
+          total(){
+            let total = 0
+              this.productos_selected.forEach((producto, index) => {
+                total +=producto.total
+              })
+  
+              this.servicios_selected.forEach((servicio, index) => {
+                total +=servicio.total
+              })
+  
+              return total
+          }
         },
         watch:{
           text(val){
