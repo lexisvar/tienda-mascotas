@@ -53,29 +53,11 @@ class ProductoEliminar(SuccessMessageMixin, DeleteView):
         return reverse('leer_productos') # Redireccionamos a la vista principal 'productos'
 
 class ProductoBuscar(View): 
-
-    def post(self, request):
-        search = request.POST['search']
-        queryset = Productos.objects.filter(nombre__icontains=search).values()
-        print(queryset) 
-        data = {
-            "name": "Vaibhav",
-            "age": 20,
-            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
-            "productos": list(queryset)
-        }
-        return JsonResponse(data)
-    
+   
     def get(self, request):
-        print(request.GET)
         search = request.GET.get('search')
-        print(search)
         queryset = Productos.objects.filter(nombre__icontains=search).values()
-        print(queryset) 
-        data = {
-            "name": "Vaibhav",
-            "age": 20,
-            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
+        data = {          
             "productos": list(queryset)
         }
         return JsonResponse(data)

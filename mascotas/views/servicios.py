@@ -51,19 +51,7 @@ class ServicioEliminar(SuccessMessageMixin, DeleteView):
         messages.success (self.request, (success_message))       
         return reverse('leer_servicios') # Redireccionamos a la vista principal 'servicios'
 
-class ServicioBuscar(View): 
-
-    def post(self, request):
-        search = request.POST['search']
-        queryset = Servicios.objects.filter(nombre__icontains=search).values()
-        print(queryset) 
-        data = {
-            "name": "Vaibhav",
-            "age": 20,
-            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
-            "servicios": list(queryset)
-        }
-        return JsonResponse(data)
+class ServicioBuscar(View):
     
     def get(self, request):
         print(request.GET)
@@ -71,10 +59,7 @@ class ServicioBuscar(View):
         print(search)
         queryset = Servicios.objects.filter(nombre__icontains=search).values()
         print(queryset) 
-        data = {
-            "name": "Vaibhav",
-            "age": 20,
-            "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"],
+        data = {           
             "servicios": list(queryset)
         }
         return JsonResponse(data)

@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from django.views.generic import ListView, DetailView 
+from django.views.generic import ListView, DetailView
+from django.views.generic.base import View 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ..models import Clientes
 
@@ -49,3 +50,13 @@ class ClienteEliminar(SuccessMessageMixin, DeleteView):
         success_message = 'Cliente Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Cliente 
         messages.success (self.request, (success_message))       
         return reverse('leer_clientes') # Redireccionamos a la vista principal 'clientes'
+
+class ClienteBuscar(View): 
+   
+    def get(self, request):
+        search = request.GET.get('search')
+        queryset = Clientes.objects.filter(nombre__icontains=search).values()
+        data = {          
+            "clientes": list(queryset)
+        }
+        return JsonResponse(data)

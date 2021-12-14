@@ -47,6 +47,13 @@
                     </div>
                     <div class="row">
                       
+                      <h4>Cliente</h4>
+                      <div class="col-8">
+                        <v-select v-model="customer_selected" :options="list_customer" label="nombre" ></v-select>
+                      </div>                  
+                    </div>
+                    <div class="row">
+                      
                       <h4>Productos</h4>
                       <div class="col-8">
                         <v-select v-model="product_selected" :options="list_product" label="nombre" ></v-select>
@@ -101,6 +108,11 @@
                         </tbody>
                       </table>
                     </div> 
+                    <div class="row">
+                      <div class="col">
+                       <button type="button" class="btn btn-primary" @click="guardar">Crear Venta</button>
+                      </div>
+                    </div>
                   </div>
             </div>
           </div>
@@ -142,8 +154,10 @@
           mostrar_mensaje : false,
           mensaje: 'Hello Vue!',
           text : '',
+          list_customer: [],
           list_product: [],
           list_service: [],
+          customer_selected : {},
           product_selected : {},
           service_selected : {},
           cantidad_producto : null,
@@ -152,6 +166,7 @@
           servicios_selected : []
         },
         created(){
+          this.clientes()
           this.productos()
           this.servicios()
         },
@@ -205,6 +220,45 @@
                   console.log(error);
                 });
           },
+          async clientes(){
+              params = {
+                search : "",
+              }
+              axios
+                .get('/clientes/buscar', {params})
+                .then(response => {
+                  if(response.status == 200){
+                    this.list_customer = response.data.clientes
+                  }
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+          },
+          async guardar(){
+              if(this.containsKey(this.customer_selected, 'id')){
+                if(this.total>1){
+                  data = {
+                    search : "",
+                  }
+                  axios
+                    .post('/ventas/guardar', data)
+                    .then(response => {
+                      if(response.status == 200){
+                        console.log(response)
+                      }
+                    })
+                    .catch(error => {
+                      console.log(error);
+                    });
+                }else{
+                  this.mostrarMsg("Debe agregar al menos un producto o servicio")
+                }
+              }else{
+                this.mostrarMsg("Seleccionar un cliente es requerido")
+              }
+              
+          },
           agregarProductos(){
             if(this.containsKey(this.product_selected, 'id')){
               if(this.cantidad_producto){
@@ -223,7 +277,6 @@
               } 
             }else{
               this.mostrarMsg("debe tener selecionado")
-              return false
             }
           },
           agregarServicios(){

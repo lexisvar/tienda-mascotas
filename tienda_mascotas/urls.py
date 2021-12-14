@@ -19,7 +19,7 @@ from django.urls import path
 from mascotas.views import MascotasListado, MascotaDetalle, MascotaCrear, MascotaActualizar, MascotaEliminar
 from mascotas.views import ProductosListado, ProductoDetalle, ProductoCrear, ProductoActualizar, ProductoEliminar, ProductoBuscar
 from mascotas.views import ServiciosListado, ServicioDetalle, ServicioCrear, ServicioActualizar, ServicioEliminar, ServicioBuscar
-from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar
+from mascotas.views import ClientesListado, ClienteDetalle, ClienteCrear, ClienteActualizar, ClienteEliminar, ClienteBuscar
 from mascotas.views import VentasListado, VentaDetalle, VentaCrear, VentaActualizar, VentaEliminar
 from mascotas.views import Dashboard
 #from . import views
@@ -68,6 +68,8 @@ urlpatterns = [
     path('clientes/crear', ClienteCrear.as_view(template_name = "clientes/crear.html"), name='crear_clientes'),
     path('clientes/editar/<int:pk>', ClienteActualizar.as_view(template_name = "clientes/actualizar.html"), name='editar_clientes'),
     path('clientes/eliminar/<int:pk>', ClienteEliminar.as_view(), name='eliminar_clientes'), 
+
+    path('clientes/buscar', ClienteBuscar.as_view(), name='buscar_clientes'), 
 
     #clientes
     path('ventas/', VentasListado.as_view(template_name = "ventas/index.html"), name='leer_ventas'), 
