@@ -31,7 +31,6 @@
 
             <div class="col-md-10">
 
-              <div class="table-responsive">
 
                 <nav aria-label="breadcrumb mb-3">
         					<ol class="breadcrumb">
@@ -39,39 +38,37 @@
         					    <li class="breadcrumb-item active">Crear</li>
         					</ol>
         				</nav>
-
-
                 	<h4>Crear</h4>
                   <div id="vue-app">
-                    {% csrf_token %}
-                    <v-select :options="options" label="nombre"></v-select>
                     <div class="row">
+                      <div v-if="mostrar_mensaje" class="col alert alert-primary" role="alert">
+                        [[mensaje]]
+                      </div>
+                    </div>
+                    <div class="row">
+                      
+                      <h4>Productos</h4>
                       <div class="col-8">
-                        <input type="text" class="form-control" id="productos" name="productos" placeholder="Producto">
-                         
+                        <v-select v-model="product_selected" :options="list_product" label="nombre" ></v-select>
                       </div>
                       <div class="col-2">
                         <input type="number" class="form-control" name="cantidad[]" placeholder="Cantidad">
                       </div>
                       <div class="col">
                         <div class="icon-big text-center">
-                          <i class="teal fas fa-plus" role="button"></i>
+                          <i class="teal fas fa-plus" role="button" @click="agregarProductos"></i>
                         </div>
-                      </div>
+                      </div>                      
+                    </div>
+                    <div class="row">                      
                     </div> 
                   </div>
-                
-              </div>
-
             </div>
+          </div>
 
-          </div>          
+
 
           <hr>
-
-                    
-          
-          
         </div>
 
     </main>
@@ -86,67 +83,25 @@
       {# JS y jQuery Bootstrap #}
       {% bootstrap_javascript jquery='full' %} 
 
-    {% comment %} <script>
-      $(document).ready(function(){
-        $("#enviar").click(function(){
-          token = $( "input[name='csrfmiddlewaretoken']" ).val();
-          cliente = $( "#id_cliente" ).val();
-          data = {
-            csrfmiddlewaretoken: token,
-            cliente: cliente,
-          },
-          $.post("/ventas/crear", data, function(data, status){
-            if(status == 'success'){
-              console.log(data)
-            }else{
-              console.log('error')
-            }
-          });
-        });
-
-        $("#productos").keyup(function(){
-          token = $( "input[name='csrfmiddlewaretoken']" ).val();
-          search = $( "#productos" ).val();
-          data = {
-            csrfmiddlewaretoken: token,
-            search: search,
-          },
-          $.post("/productos/buscar", data, function(data, status){
-            if(status == 'success'){
-              $('#productos-list').show()
-              console.log(data)
-            }else{
-              console.log('error')
-            }
-          });
-        });
-
-        $('#productos').focusout(function(){
-          $('#productos-list').hide()
-        });
-
-        
-
-      });
-
-      
-    </script> {% endcomment %}
-    {% comment %} https://select2.org/getting-started/installation {% endcomment %}
-
+   
     <script>
       Vue.component('v-select', VueSelect.VueSelect)
       var app = new Vue({
         delimiters: ["[[", "]]"],
         el: '#vue-app',
         data: {
-          message: 'Hello Vue!',
+          mostrar_mensaje : false,
+          mensaje: 'Hello Vue!',
           text : '',
-          options: [
+          list_product: [
             {
               id:1,
               nombre:"Alexis",
             }
-          ]
+          ],
+          product_selected : {},
+          cantidad_producto : null,
+          productos_selected : []
         },
         created(){
           this.productos()
@@ -159,18 +114,33 @@
         methods:{
           async productos(){
               params = {
-                search : "ringo",
+                search : "",
               }
               axios
                 .get('/productos/buscar', {params})
                 .then(response => {
                   if(response.status == 200){
-                    this.options = response.data.productos
+                    this.list_product = response.data.productos
                   }
                 })
                 .catch(error => {
                   console.log(error);
                 });
+          },
+          agregarProductos(){
+            if(this.product_selected){
+
+            }else{
+              this.mostrarMsg("debe tener selecionado")
+              return false
+            }
+            console.log(this.product_selected)
+          },
+          mostrarMsg(mensaje){
+            this.mensaje = mensaje
+
+            this.mostrar_mensaje = true
+            setTimeout(() => this.mostrar_mensaje = false, 3000);
           }
         }
       })
