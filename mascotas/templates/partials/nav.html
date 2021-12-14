@@ -24,7 +24,7 @@
         <li class="nav-item {% if '/productos' in request.path %}active{% endif %}"> <a class="nav-link" href="/productos"> Productos </a> </li>
         <li class="nav-item {% if '/servicios' in request.path %}active{% endif %}"> <a class="nav-link" href="/servicios"> Servicios </a> </li>
         <li class="nav-item {% if '/ventas' in request.path %}active{% endif %}"> <a class="nav-link" href="/ventas"> Ventas </a> </li>
-        <li class="nav-item"{% if '/configuracion' in request.path %}active{% endif %}><a class="nav-link" href="/configuracion"> Configuración </a></li>
+        {% comment %} <li class="nav-item"{% if '/configuracion' in request.path %}active{% endif %}><a class="nav-link" href="/configuracion"> Configuración </a></li> {% endcomment %}
       </ul>
     </div>
   </div>

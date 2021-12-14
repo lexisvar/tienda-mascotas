@@ -4,7 +4,8 @@ from django.http import JsonResponse
 
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from ..models import Mascotas, Clientes, Productos, Servicios
+from ..models import Mascotas, Clientes, Productos, Servicios, Ventas
+from django.db.models import Sum
 
 from django.urls import reverse
 
@@ -22,4 +23,6 @@ class Dashboard(ListView):
       context['cantidad_clientes'] = Clientes.objects.count()
       context['cantidad_productos'] = Productos.objects.count()
       context['cantidad_servicios'] = Servicios.objects.count()
+
+      context['total_ventas'] = Ventas.objects.aggregate(Sum('total'))
       return context
